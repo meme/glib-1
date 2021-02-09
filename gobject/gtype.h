@@ -370,6 +370,16 @@ G_BEGIN_DECLS
  * Returns: %TRUE on success
  */
 #define G_TYPE_HAS_VALUE_TABLE(type)            (g_type_value_table_peek (type) != NULL)
+/**
+ * G_TYPE_IS_FINAL:
+ * @type: a #GTyp value
+ *
+ * Checks if @type is a final type. A final type cannot be derived any
+ * further.
+ *
+ * Returns: %TRUE of success
+ */
+#define G_TYPE_IS_FINAL(type)                   (g_type_test_flags ((type), G_TYPE_FLAG_FINAL))
 
 
 /* Typedefs
@@ -1002,13 +1012,16 @@ typedef enum    /*< skip >*/
  * @G_TYPE_FLAG_VALUE_ABSTRACT: Indicates an abstract value type, i.e. a type
  *  that introduces a value table, but can't be used for
  *  g_value_init()
+ * @G_TYPE_FLAG_FINAL: Indicates a final type. A final type is a non-derivable
+ *  leaf node in a deep derivable type hierarchy tree
  * 
  * Bit masks used to check or determine characteristics of a type.
  */
 typedef enum    /*< skip >*/
 {
-  G_TYPE_FLAG_ABSTRACT		= (1 << 4),
-  G_TYPE_FLAG_VALUE_ABSTRACT	= (1 << 5)
+  G_TYPE_FLAG_ABSTRACT          = (1 << 4),
+  G_TYPE_FLAG_VALUE_ABSTRACT    = (1 << 5),
+  G_TYPE_FLAG_FINAL             = (1 << 6)
 } GTypeFlags;
 /**
  * GTypeInfo:
