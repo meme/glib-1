@@ -6122,3 +6122,17 @@ g_get_worker_context (void)
 
   return glib_worker_context;
 }
+
+/**
+ * g_steal_fd:
+ * @fd_ptr: (not nullable): A pointer to a file descriptor
+ *
+ * Sets @fd_ptr to -1, returning the value that was there before.
+ *
+ * Conceptually, this transfers the ownership of the file descriptor
+ * from the referenced variable to the caller of the function (i.e.
+ * "steals" the reference). This is very similar to g_steal_pointer(),
+ * but for file descriptors.
+ *
+ * Since: 2.70
+ */
